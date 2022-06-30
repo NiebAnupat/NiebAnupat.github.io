@@ -24,7 +24,7 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   router: {
-    base: '/TodoWebSPA.github.io/'
+    base: '/NiebAnupat.github.io/'
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
