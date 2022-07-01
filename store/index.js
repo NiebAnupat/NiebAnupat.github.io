@@ -35,6 +35,7 @@ export const actions = {
             // await dispatch('todos/fetchTodos');
           
             console.log('user logged in')
+            commit('todos/setTodos',{title:'Test01',status:false})
           },
       onAuthStateChangedAction(state){
             
