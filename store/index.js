@@ -1,3 +1,6 @@
+import JWTDecode from 'jwt-decode'
+import CookieParser from 'cookieparser'
+
 export const state = () => ({})
 
 export const getters = {}
