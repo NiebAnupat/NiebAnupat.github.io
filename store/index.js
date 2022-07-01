@@ -19,7 +19,7 @@ export const actions = {
 
     if (!access_token) return;
 
-    const decoded = JWTDecode(access_token)s
+    const decoded = JWTDecode(access_token)
 
     if (!decoded) return;
 
