@@ -69,8 +69,17 @@ export default {
       errorMessage: '',
     }
   },
-  methods: {
-    signIn() {},
+ methods: {
+   async signIn() {
+      // eslint-disable-next-line node/handle-callback-err
+      await this.$store.dispatch('users/login', this.user).catch((error) => {
+        this.isError = true
+        this.errorMessage = error.code
+        setTimeout(() => {
+          this.isError = false
+        }, 5000)
+      })
+    },
   },
 }
 </script>

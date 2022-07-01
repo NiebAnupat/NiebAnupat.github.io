@@ -62,13 +62,14 @@ export default {
     },
     services: {
       auth: {
-        persistence: 'local', // default
-        initialize: {
-          onAuthStateChangedMutation: 'ON_AUTH_STATE_CHANGED_MUTATION',
-          onAuthStateChangedAction: 'onAuthStateChangedAction',
-          subscribeManually: false,
+        ssr: true,
+        credential: '~/assets/serviceAccountKey.json',
+      },
+      firestore: {
+        ssr: true,
+        enablePersistence: {
+          synchronizeTabs: true,
         },
-        ssr: false, // default
       },
     },
   },
