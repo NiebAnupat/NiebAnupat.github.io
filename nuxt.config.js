@@ -12,8 +12,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - TodoWebSPA',
-    title: 'TodoWebSPA',
+    titleTemplate: '%s - TodoWebSSR',
+    title: 'TodoWebSSR',
     htmlAttrs: {
       lang: 'en',
     },
