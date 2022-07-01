@@ -8,7 +8,7 @@ export const mutations = {
 
 export const actions = {
   nuxtServerInit({ commit, dispatch }, { req }) {
-    // console.log('nuxtServerInit....')
+    console.log('nuxtServerInit....')
 
     // if (process.server && process.static) return;
     // if (!req.headers.cookie) return;
