@@ -7,7 +7,7 @@ export const mutations = {
 }
 
 export const actions = {
-  nuxtServerInit({ commit, dispatch }, { req }) {
+  async nuxtServerInit({ commit, dispatch }, { req }) {
     console.log('nuxtServerInit....')
 
     // if (process.server && process.static) return;
