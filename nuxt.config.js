@@ -2,7 +2,7 @@ import colors from 'vuetify/es5/util/colors'
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: true,
+  // ssr: false,
 
   // Target: https://go.nuxtjs.dev/config-target
   // target: 'static',
@@ -22,9 +22,9 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
-  router: {
-    base: '/NiebAnupat.github.io/'
-  },
+  // router: {
+  //   base: '/NiebAnupat.github.io/'
+  // },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
