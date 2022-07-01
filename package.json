@@ -11,8 +11,7 @@
     "lint:prettier": "prettier --check .",
     "lint": "npm run lint:js && npm run lint:prettier",
     "lintfix": "prettier --write --list-different . && npm run lint:js -- --fix",
-    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup",
-    "heroku-postbuild" : "nuxt build"
+    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
     "@mdi/font": "^6.9.96",
