@@ -41,7 +41,8 @@ export default {
   },
   methods: {
     async add() {
-      await this.$store
+      if (this.task.title) {
+        await this.$store
         .dispatch('todos/add', this.task)
         .then(() => {
           this.task = {
@@ -51,6 +52,7 @@ export default {
         .catch((err) => {
           console.log(err)
         })
+      }
     },
   },
 }
