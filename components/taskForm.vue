@@ -14,7 +14,6 @@
               v-model="task.title"
               label="ชื่อรายการ"
               outlined
-              :rules="[(v) => !!v || 'กรุณากรอกชื่อรายการ']"
               class="white--text"
             >
             </v-text-field>
@@ -35,7 +34,7 @@ export default {
   data() {
     return {
       task: {
-        title: '',
+        title: null,
       },
     }
   },
@@ -46,7 +45,7 @@ export default {
         .dispatch('todos/add', this.task)
         .then(() => {
           this.task = {
-            title: '',
+            title: null,
           }
         })
         .catch((err) => {

@@ -8,7 +8,7 @@
           เสร็จสิ้นแล้ว : {{ completedTasks }}
         </span>
         <span class="warning--text text--lighten-1">
-          ยังไม่ได้เสร็จ : {{ undoneTasks }}</span
+          ยังไม่เสร็จ : {{ undoneTasks }}</span
         >
       </strong>
         <v-progress-circular
