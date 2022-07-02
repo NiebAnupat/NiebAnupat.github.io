@@ -1,11 +1,8 @@
+/* eslint-disable camelcase */
+/* eslint-disable no-useless-return */
+
 import JWTDecode from 'jwt-decode'
 import CookieParser from 'cookieparser'
-
-export const state = () => ({})
-
-export const getters = {}
-
-export const mutations = {}
 
 export const actions = {
   async nuxtServerInit({ commit, dispatch }, { req }) {
@@ -34,8 +31,11 @@ export const actions = {
     }).catch((err) => {
       console.log(err)
     })
-
-   
- 
   },
+
+  onAuthStateChangedAction({ dispatch }, user) {
+    if (user) {
+      dispatch('users/loginWithGoogle')
+    }
+  }
 }

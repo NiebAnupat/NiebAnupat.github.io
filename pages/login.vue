@@ -1,36 +1,41 @@
 <template>
   <v-row justify="center" align="center" style="height: 80vh;">
-    <v-col cols="12" sm="8" md="6" lg="4" xl="4">
-      <signIn v-if="!getRegister" @toggleRegister="toggleRegister" /> 
-      <register v-else @toggleRegister="toggleRegister"/>
-      </v-col>
+    <v-row  justify="center" align="center">
+      <v-col cols="12" sm="8" md="6" lg="4" xl="4">
+        <signIn v-if="!getRegister && !getForgotPassword" @toggleRegister="toggleRegister" @toggleForgotPassword="toggleForgotPassword" />
+        <register v-if="getRegister" @toggleRegister="toggleRegister"/>
+        <ForgotPassword v-if="getForgotPassword" @toggleForgotPassword="toggleForgotPassword"/>
+        </v-col>
+    </v-row> 
   </v-row>
 </template>
 
 <script>
 import signIn from '~/components/signIn.vue'
 import register from '~/components/register.vue'
+import forgotPassword from '~/components/forgotPassword.vue'
 export default {
   component: {
-    signIn,register
+    signIn,register,forgotPassword
   },
   data() {
     return {
       getRegister: false,
+      getForgotPassword: false,
     }
   },
    methods: {
     toggleRegister() {
       this.getRegister = !this.getRegister;
     },
+    toggleForgotPassword() {
+      this.getForgotPassword = !this.getForgotPassword;
+    },
+    
   },
 }
 </script>
 
 <style scoped>
-signIn.hidden {
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0s 2s, opacity 2s linear;
-}
+
 </style>

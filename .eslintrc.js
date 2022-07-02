@@ -22,6 +22,7 @@ module.exports = {
   "vue/component-definition-name-casing": "off", 
   "no-v-for-template-key": "off",
   "vue/v-slot-style" : "off",
+  "camelcase": "off",
 
 },
 

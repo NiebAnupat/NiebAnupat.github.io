@@ -41,11 +41,16 @@ export default {
   },
   methods: {
     async add() {
-      await this.$store.dispatch('todos/add', this.task).then(() => {
-        this.task = {
-          title: '',
-        }
-      })
+      await this.$store
+        .dispatch('todos/add', this.task)
+        .then(() => {
+          this.task = {
+            title: '',
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
   },
 }

@@ -15,6 +15,12 @@ export const getters = {
   getLastTask(state) {
     return state.list[state.list.length - 1]
   },
+  getDoneTodos: (state) => {
+    return state.list.filter((list) => list.status)
+  },
+  undoneTodosCount: (state) => {
+    return state.list.filter((list) => !list.status).length
+  }
 }
 
 export const mutations = {
@@ -40,10 +46,9 @@ export const mutations = {
 export const actions = {
   async add({ commit, dispatch }, todo) {
     await commit('add', todo)
-
-    // await dispatch('saveTask').catch((err) => {
-    //   throw err
-    // })
+    await dispatch('saveTask').catch((err) => {
+      throw err
+    })
   },
   async remove({ commit, rootGetters }, todo) {
     const { uid } = await rootGetters['users/getUser']
@@ -64,11 +69,25 @@ export const actions = {
         throw err
       })
   },
-  async toggle({ commit,dispatch,rootGetters }, todo) {
-    
+
+  async removeDoneTodos({ dispatch, getters }) {
+    const todos = await getters.getDoneTodos
+    todos.forEach((todo) => {
+      dispatch('remove', todo)
+    })
+  },
+
+  async removeAllTodos({ dispatch, getters }){
+    const todos = await getters.getTodos
+    todos.forEach((todo) => {
+      dispatch('remove', todo)
+    })
+  }
+  ,
+  async toggle({ commit, dispatch, rootGetters }, todo) {
     const { uid } = await rootGetters['users/getUser']
     await this.$fire.firestore
-    .collection('users')
+      .collection('users')
       .doc(uid)
       .collection('todos')
       .where('id', '==', todo.id)
@@ -86,7 +105,6 @@ export const actions = {
       .catch((err) => {
         throw err
       })
-    
   },
 
   async saveTask({ getters, rootGetters }) {

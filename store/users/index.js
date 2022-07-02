@@ -32,6 +32,28 @@ export const actions = {
       console.log('user logged in')
       await dispatch('checkUserInDB')
         .then(() => {
+          dispatch('todos/fetchTodos')
+          this.app.router.push('/')
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
+  },
+
+  async loginWithGoogle({ commit, dispatch}){
+    try {
+      const { email, uid, displayName } = await this.$fire.auth.currentUser
+      const token = await this.$fire.auth.currentUser.getIdToken()
+      const userData = { email, uid, displayName}
+      Cookies.set('access_token', token)
+      await commit('setUser', userData)
+      await dispatch('checkUserInDB')
+        .then(() => {
+          dispatch('todos/fetchTodos')
           this.app.router.push('/')
         })
         .catch((err) => {
@@ -52,12 +74,13 @@ export const actions = {
     location.href = '/login'
   },
 
-  async register({ commit }, user) {
+  async register({ dispatch }, user) {
     console.log(user)
     await this.$fire.auth
       .createUserWithEmailAndPassword(user.email, user.password)
       .then(() => {
         console.log('user registered')
+        dispatch('logout')
         location.reload()
       })
       .catch((e) => {

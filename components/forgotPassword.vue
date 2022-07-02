@@ -1,11 +1,11 @@
 <template>
- <v-card elevation="5" class="pa-4" :loading="isLoading">
+  <v-card elevation="5" class="pa-4">
     <v-card-title>
-      <span class="headline mx-auto">ลงทะเบียน</span>
+      <span class="headline mx-auto">ลืมรหัสผ่าน</span>
     </v-card-title>
     <v-divider class="mx-10"></v-divider>
     <v-card-text class="px-16 pb-8">
-      <v-form @submit.prevent="register">
+      <v-form @submit.prevent="forgotPassword">
         <v-layout>
           <v-col>
             <v-row>
@@ -16,17 +16,9 @@
                 :rules="rules"
               ></v-text-field>
             </v-row>
-            <v-row>
-              <v-text-field
-                v-model="user.password"
-                prepend-icon="mdi-lock"
-                label="รหัสผ่าน"
-                type="password"
-              ></v-text-field>
-            </v-row>
             <v-row class="mt-6">
-              <v-btn type="submit" color="primary"> ลงทะเบียน </v-btn>
-              <v-btn color="secondary" class="ml-6" @click="$emit('toggleRegister')" >
+              <v-btn type="submit" color="primary" @click="forgotPassword"> ยืนยัน </v-btn>
+              <v-btn color="secondary" @click="$emit('toggleForgotPassword')" class="ml-6">
                 ยกเลิก
               </v-btn>
             </v-row>
@@ -36,7 +28,6 @@
     </v-card-text>
     <v-snackbar v-model="isError">
       {{ errorMessage }}
-
       <template #action="{ attrs }">
         <v-btn color="pink" text v-bind="attrs" @click="isError = false">
           ปิด
@@ -48,9 +39,9 @@
 
 <script>
 export default {
-       data() {
+      data() {
     return {
-      user: { email: '', password: '' },
+      user: { email: ''},
 
       rules: [
         (value) => !!value || 'Required.',
@@ -64,22 +55,23 @@ export default {
 
       isError: false,
       errorMessage: '',
-      isLoading: false,
     }
   },
-   methods: {
-      register() {
-        this.isLoading = true;
-      // eslint-disable-next-line node/handle-callback-err
-      this.$store.dispatch('users/register', this.user).catch((error) => {
-        this.isError = true
-        this.errorMessage = error.code
-        setTimeout(() => {
-          this.isError = false
-        }, 5000)
-      })
+  methods: {
+    forgotPassword() {
+      const that = this
+      this.$fire.auth
+        .sendPasswordResetEmail(this.user.email)
+        .then(function () {
+          that.errorMessage = 'reset link sent to ' + that.user.email
+          that.isError = true
+        })
+        .catch(function (error) {
+          that.errorMessage = error.message
+          that.isError = true
+        })
     },
-   }
+  },
 }
 </script>
 

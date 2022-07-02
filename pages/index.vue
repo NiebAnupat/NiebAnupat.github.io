@@ -1,13 +1,11 @@
 <template>
   <v-row justify="center" align="center" class="">
     <v-col cols="12" sm="8" md="6" class="">
-      
       <taskForm />
 
       <v-divider class="my-5"></v-divider>
 
-      <listView/>
-      
+      <listView />
     </v-col>
   </v-row>
 </template>
@@ -20,6 +18,7 @@ export default {
   components: {
     taskForm,
     listView,
-},
+  },
+  middleware: 'auth',
 }
 </script>

@@ -64,6 +64,10 @@ export default {
       auth: {
         ssr: true,
         credential: '~/assets/serviceAccountKey.json',
+        initialize: {
+          onAuthStateChangedAction: 'onAuthStateChangedAction',
+          subscribeManually: false
+        },
       },
       firestore: {
         ssr: true,
